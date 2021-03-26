@@ -1,26 +1,33 @@
-import React, {useState} from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   
-  const handleClick = (e) => 
+  useEffect(() => 
   {
-    fetch('https://localhost:5001/api/Ingredient')
-    .then((response) => 
+    const getRecipes = async () => 
     {
-        console.log(response);
-    });
-  }
+      await fetch('https://localhost:5001/api/ingredient')
+        .then(async (response) => 
+        {
+          if(response.ok)
+          {
+            let data = await response.json();
+            setRecipes([...data]);
+          }
+        });
+    };
+
+    getRecipes();
+  }, [])
 
   return (
     <>
-    <button type="button" onClick={handleClick}> Send request </button>
-    <ul>
-      {recipes.map(recipe => (
-        <li key={recipe.id}>{recipe.name}</li>
-      ))}
-    </ul>
-      <h1>Its raining baby</h1>
+      <ul>
+        {recipes.map(recipe => (
+          <li key={recipe.id}>{recipe.name}</li>
+        ))}
+      </ul>
     </>
   );
 }
