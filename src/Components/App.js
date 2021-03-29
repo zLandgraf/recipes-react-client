@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Recipe from './Recipes/Recipe';
+import AddRecipe from './Recipes/AddRecipe';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -23,42 +24,10 @@ function App() {
     getRecipes();
   }, [])
 
-  const handleSubmit = (event) => 
-  {
-    event.preventDefault();
-    console.log("teste");
-  }
-
   return (
     <>
       <div className="container-fluid p-5">
-        <div className="row justify-content-center">
-          <div className="col-4">
-            <form onSubmit={handleSubmit}>
-              <div className="form-group mb-3">
-                <span>Nome: </span>
-                <input type="text" class="form-control" />
-              </div>
-              <div className="form-group row mb-3">
-                <div class="form-group col-4">
-                  <span>Ingrediente: </span>
-                  <input type="text" class="form-control" />
-                </div>
-                <div class="form-group col-4">
-                  <span>Quantidade: </span>
-                  <input type="number" class="form-control" />
-                </div>
-                <div class="form-group col-4">
-                  <span>Unidade: </span>
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-              <div className="form-group row justify-content-end p-2">
-                <button type="submit" className="btn btn-success">Adicionar</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <AddRecipe />
       </div>
       <div className="container-fluid p-5">
           <Recipe recipes={recipes}/>
