@@ -3,17 +3,13 @@ import { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
-const FirstStep = ({ChangeStep, ChooseRecipeName}) => {
-  const [name, setName] = useState('');
+const FirstStep = ({CurrentName, ChangeStep, ChooseRecipeName}) => {
+  const [name, setName] = useState(CurrentName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let valid = true;
-    if(valid)
-    {
-      ChooseRecipeName(name);
-      ChangeStep('firstStep', 'secondStep');
-    }
+    ChooseRecipeName(name);
+    ChangeStep('firstStep', 'secondStep');
   }
 
   return (
@@ -24,7 +20,6 @@ const FirstStep = ({ChangeStep, ChooseRecipeName}) => {
                <TextField
                   onChange={(e) => setName(e.target.value)}
                   label="Name"
-                  variant="outlined"
                   value={name} 
                 />
             </div>

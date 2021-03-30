@@ -4,9 +4,9 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const SecondStep = ({ChangeStep, ChooseIngredients }) => {
+const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
   const [options, setOptions] = useState([]);
-  const [choosenIngredients, setChoosenIngredients] = useState([]);
+  const [choosenIngredients, setChoosenIngredients] = useState([...CurrentIngredients]);
 
   useEffect(() => 
   {
@@ -28,8 +28,8 @@ const SecondStep = ({ChangeStep, ChooseIngredients }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    ChooseIngredients(choosenIngredients);
     ChangeStep('secondStep', 'thirdStep')
-    ChooseIngredients(...choosenIngredients);
   }
 
   return (
@@ -41,9 +41,10 @@ const SecondStep = ({ChangeStep, ChooseIngredients }) => {
                 id="combo-box-demo"
                 multiple
                 options={options}
+                defaultValue={CurrentIngredients}
                 getOptionLabel={(option) => option.name}
                 style={{ width: 600 }}
-                onChange={(event, option) => setChoosenIngredients([...choosenIngredients, option])}
+                onChange={(event, option) => setChoosenIngredients([...option])}
                 renderInput={(params) => (
                   <TextField
                     {...params} 
