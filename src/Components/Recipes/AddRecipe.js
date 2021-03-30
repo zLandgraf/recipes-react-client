@@ -7,12 +7,12 @@ const AddRecipe = props => {
     name: '',
     ingredients: [{
       name: '',
-      amount:0,
+      amount: 0,
       unit: 0
     }],
   });
 
-  const handleChangeRecipeName = (event) => 
+  const handleChange = (event) => 
   {
     setRecipe({...recipe, [event.target.name] : event.target.value })
   }
@@ -36,7 +36,7 @@ const AddRecipe = props => {
           <div className="form-group mb-3">
             <span>Nome: </span>
             <input
-              onChange={handleChangeRecipeName}
+              onChange={handleChange}
               value={recipe.name} 
               type="text"
               className="form-control"

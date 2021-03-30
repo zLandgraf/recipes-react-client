@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './Components/App';
+import Recipes from './Testes/Recipes';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <App />,
+   <Recipes />,
   document.getElementById('root')
 );
 
