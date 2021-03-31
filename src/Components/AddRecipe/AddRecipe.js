@@ -42,9 +42,24 @@ const Recipes = () => {
   }
 
   const handleCreatRecipe = () => {
+    let request = {
+      name: recipe.name,
+      ingredients: recipe.ingredients.map(ingredient => {
+        return {
+          ...ingredient,
+          amount: parseInt(ingredient.amount)
+        }
+      })
+    }
+    
+    console.log(request);
+
     fetch('https://localhost:44348/api/recipe', {
-      method: 'post',
-      body: JSON.stringify(recipe)
+       method: 'post',
+       body: JSON.stringify(request),
+       headers:{
+         "Content-Type": "application/json"
+       }
     })
     .then(async (response) => await response.json())
     .then((data) => console.log(data));

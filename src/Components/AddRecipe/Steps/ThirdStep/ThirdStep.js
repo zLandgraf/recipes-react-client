@@ -21,7 +21,7 @@ const ThirdStep = ({ ChangeStep, CurrentIngredients, HandleAdjustIngredients, Ha
  
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('ok');
+    HandleCreatRecipe();
   }
 
   return (
