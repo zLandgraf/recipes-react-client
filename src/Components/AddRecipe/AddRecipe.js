@@ -41,6 +41,15 @@ const Recipes = () => {
     })
   }
 
+  const handleCreatRecipe = () => {
+    fetch('https://localhost:44348/api/recipe', {
+      method: 'post',
+      body: JSON.stringify(recipe)
+    })
+    .then(async (response) => await response.json())
+    .then((data) => console.log(data));
+  }
+
   if(steps.firstStep) 
     return (<FirstStep 
       CurrentName={recipe.name}
@@ -55,7 +64,8 @@ const Recipes = () => {
     return (<ThirdStep
       CurrentIngredients={recipe.ingredients} 
       ChangeStep={handleChangeStep}  
-      HandleAdjustIngredients={handleAdjustIngredients}/>)
+      HandleAdjustIngredients={handleAdjustIngredients} 
+      HandleCreatRecipe={handleCreatRecipe} />)
 }
 
 export default Recipes

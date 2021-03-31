@@ -16,14 +16,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ThirdStep = ({ ChangeStep, CurrentIngredients, HandleAdjustIngredients }) => { 
+const ThirdStep = ({ ChangeStep, CurrentIngredients, HandleAdjustIngredients, HandleCreatRecipe }) => { 
   const classes = useStyles();
+ 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('ok');
+  }
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
           Choose the amount and units of the ingredients
       </Typography>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           {CurrentIngredients.map(ingredient => 
             <Ingredient
@@ -44,8 +50,7 @@ const ThirdStep = ({ ChangeStep, CurrentIngredients, HandleAdjustIngredients }) 
               type="submit"
               size="large"
               variant="contained" 
-              color="primary" 
-              type="submit"> 
+              color="primary"> 
               Finish 
             </Button>
           </Grid>

@@ -82,8 +82,7 @@ const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
               type="submit"
               size="large"
               variant="contained" 
-              color="primary" 
-              type="submit"> 
+              color="primary"> 
               Next 
             </Button>
           </Grid>
