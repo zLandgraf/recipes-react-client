@@ -21,12 +21,13 @@ const Ingredient = ({Ingredient, HandleAdjustIngredients}) => {
   return (
    <>
     <Grid item xs={12} sm={4}>
-      <TextField
-        variant='filled' 
+       <TextField
         label="Name" 
-        name="name" 
+        name="name"
+        defaultValue={Ingredient.name}
         disabled={true}
-        fullWidth > {Ingredient.name} </TextField>
+        fullWidth
+      />
     </Grid>
     <Grid item xs={12} sm={4}>
       <TextField

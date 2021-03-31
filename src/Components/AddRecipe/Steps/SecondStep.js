@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
+const SecondStep = ({CurrentIngredients, MoveNext, MoveBack, ChooseIngredients }) => {
   const [options, setOptions] = useState([]);
   const [choosenIngredients, setChoosenIngredients] = useState([...CurrentIngredients]);
   const classes = useStyles();
@@ -43,16 +43,13 @@ const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     ChooseIngredients(choosenIngredients);
-    ChangeStep('secondStep', 'thirdStep')
+    MoveNext();
   }
 
   return (
     <>  
-      <Typography variant="h6" gutterBottom>
-          Choose the ingredients
-      </Typography>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
+        <Grid container spacing={6}>
           <Grid item xs={12}>
            <Autocomplete
                 multiple
@@ -74,7 +71,7 @@ const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
               className={classes.button} 
               variant="contained" 
               size="large"
-              onClick={() => ChangeStep('secondStep', 'firstStep')}> 
+              onClick={() => MoveBack()}> 
               Back 
             </Button>
             <Button

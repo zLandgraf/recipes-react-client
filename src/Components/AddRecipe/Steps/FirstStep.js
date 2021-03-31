@@ -5,31 +5,33 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  linkButton:{
+    textDecoration:"none",
+    marginRight: theme.spacing(2),
+  }
 }));
 
-const FirstStep = ({CurrentName, ChangeStep, ChooseRecipeName}) => {
+const FirstStep = ({CurrentName, MoveNext, ChooseRecipeName}) => {
   const [name, setName] = useState(CurrentName);
   const classes = useStyles();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     ChooseRecipeName(name);
-    ChangeStep('firstStep', 'secondStep');
+    MoveNext();
   }
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        Choose a name for the recipe
-      </Typography>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
+        <Grid container direction="column" spacing={8}>
           <Grid item xs={12}>
             <TextField
               onChange={(e) => setName(e.target.value)}
@@ -40,6 +42,13 @@ const FirstStep = ({CurrentName, ChangeStep, ChooseRecipeName}) => {
             />
           </Grid>
           <Grid item xs={12} className={classes.buttons}>
+            <Link to="/" className={classes.linkButton}>
+              <Button 
+                type="submit"
+                size="large"
+                variant="contained" >Back
+              </Button>
+            </Link>
             <Button 
               type="submit"
               size="large"
@@ -53,5 +62,6 @@ const FirstStep = ({CurrentName, ChangeStep, ChooseRecipeName}) => {
     </>
   )
 }
+
 export default FirstStep;
 
