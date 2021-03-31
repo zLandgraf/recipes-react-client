@@ -3,10 +3,24 @@ import { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginLeft: theme.spacing(2),
+  },
+}));
 
 const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
   const [options, setOptions] = useState([]);
   const [choosenIngredients, setChoosenIngredients] = useState([...CurrentIngredients]);
+  const classes = useStyles();
 
   useEffect(() => 
   {
@@ -33,17 +47,18 @@ const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
   }
 
   return (
-    <div className="p-5">
-      <h3>Choose a name for the recipe </h3>
-        <form onSubmit={handleSubmit}>
-            <div>
-               <Autocomplete
-                id="combo-box-demo"
+    <>  
+      <Typography variant="h6" gutterBottom>
+          Choose the ingredients
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+           <Autocomplete
                 multiple
                 options={options}
                 defaultValue={CurrentIngredients}
                 getOptionLabel={(option) => option.name}
-                style={{ width: 600 }}
                 onChange={(event, option) => setChoosenIngredients([...option])}
                 renderInput={(params) => (
                   <TextField
@@ -53,17 +68,28 @@ const SecondStep = ({CurrentIngredients, ChangeStep, ChooseIngredients }) => {
                   />
                 )}
               />
-            </div>
-            <div className="form-group">
-              <Button onClick={() => ChangeStep('secondStep', 'firstStep')}> 
-                  Back 
-              </Button>
-              <Button type="submit"> 
-                Next 
-              </Button>
-            </div>
-        </form>
-    </div>
+          </Grid>
+          <Grid item xs={12} className={classes.buttons}>
+            <Button
+              className={classes.button} 
+              variant="contained" 
+              size="large"
+              onClick={() => ChangeStep('secondStep', 'firstStep')}> 
+              Back 
+            </Button>
+            <Button
+              className={classes.button} 
+              type="submit"
+              size="large"
+              variant="contained" 
+              color="primary" 
+              type="submit"> 
+              Next 
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </>
   )
 }
 export default SecondStep;

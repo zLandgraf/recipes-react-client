@@ -6,16 +6,8 @@ import AddRecipe from './AddRecipe/AddRecipe'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor:'#f5f5f5',
-    minHeight: '100vh',
     justifyContent:'center',
-    padding: theme.spacing(12),
-  },
-  formContainer: {
-    display:'flex',
-    justifyContent:'center',
-    backgroundColor:'#ffffff',
-    padding: theme.spacing(5),
+    padding: theme.spacing(8),
   },
 }));
 
@@ -24,7 +16,7 @@ const App = () => {
   return (
     <>
       <Grid container spacing={5} className={classes.root}>
-        <Grid item xs={6} className={classes.formContainer}>
+        <Grid item xs='6'>
           <AddRecipe />
         </Grid>
       </Grid>

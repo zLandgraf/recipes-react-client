@@ -1,5 +1,6 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid';
 
 const Ingredient = ({Ingredient, HandleAdjustIngredients}) => {
 
@@ -9,26 +10,34 @@ const Ingredient = ({Ingredient, HandleAdjustIngredients}) => {
 
   return (
    <>
-       <TextField 
-          label="Name" 
-          name="name" 
-          value={Ingredient.name} 
-          disabled={true} 
-        />
-       <TextField 
-          label="Amount" 
-          name="amount"
-          value={Ingredient.amount} 
-          onChange={(e) => handleChange(e, Ingredient.id)} 
-        />
-       <TextField 
-          label="Unit"
-          name="unit"
-          value={Ingredient.unit}
-          onChange={(e) => handleChange(e, Ingredient.id)}
-        />
-       <br />
-       <br />
+    <Grid item xs={12} sm={4}>
+      <TextField
+        variant='filled' 
+        label="Name" 
+        name="name" 
+        value={Ingredient.name} 
+        disabled={true}
+        fullWidth 
+      />
+    </Grid>
+    <Grid item xs={12} sm={4}>
+      <TextField 
+        label="Amount" 
+        name="amount"
+        value={Ingredient.amount} 
+        onChange={(e) => handleChange(e, Ingredient.id)} 
+        fullWidth
+      />
+    </Grid>
+    <Grid item xs={12} sm={4}>
+      <TextField 
+        label="Unit"
+        name="unit"
+        value={Ingredient.unit}
+        onChange={(e) => handleChange(e, Ingredient.id)}
+        fullWidth
+      />
+    </Grid>
    </>
   )
 }
