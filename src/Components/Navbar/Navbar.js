@@ -27,7 +27,7 @@ export default function Navbar() {
   const classes = useStyles();
   return (
     <div>
-      <AppBar position="static" color="primary" className={classes.root}>
+      <AppBar position="relative" color="primary" className={classes.root}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />

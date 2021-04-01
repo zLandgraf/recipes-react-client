@@ -10,6 +10,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,6 +49,7 @@ const Recipes = () => {
   const steps = ['Recipe name', 'Choosing ingredients', 'Preparation']
   const [activeStep, setActiveStep] = React.useState(0);
   const [recipe, setRecipe] = useState({name: '',  ingredients: []});
+  const [completed, setCompleted] = useState(false);
   
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -96,8 +98,11 @@ const Recipes = () => {
          "Content-Type": "application/json"
        }
     })
-    .then(async (response) => await response.json())
-    .then((data) => console.log(data));
+    .then(async (response) => {
+      if(response.ok)
+        setCompleted(true)
+    })
+    .catch((err) => console.log(err));
   }
 
   const getStep = (step) => {
@@ -124,8 +129,9 @@ const Recipes = () => {
     }
   }
 
-  return (
-    <React.Fragment>
+  return completed 
+    ? <Redirect to='/'/>
+    :(<React.Fragment>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography color='secondary' variant="h3" align="center">

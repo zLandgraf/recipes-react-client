@@ -1,15 +1,19 @@
 import React from 'react'
 import Navbar from './Navbar/Navbar'
+import {ScrollTop} from './Navbar/Navbar'
 import AddRecipe from './AddRecipe/AddRecipe';
 import Recipes from './Recipes/Recipes';
-import { CssBaseline,
+import { 
+  CssBaseline,
+  Fab,
   createMuiTheme,
   ThemeProvider, 
 } from '@material-ui/core'
 import {
   BrowserRouter as Router,
   Switch,
-  Route 
+  Route,
+  Redirect 
 } from "react-router-dom";
 
 const theme = createMuiTheme({
@@ -36,12 +40,9 @@ const App = () => {
           <CssBaseline />
           <Navbar />
           <Switch>
-            <Route path="/new">
-              <AddRecipe />
-            </Route>
-            <Route path="/">
-              <Recipes />
-            </Route>
+            <Route path="/new" component={AddRecipe} />
+            <Route path="/" component={Recipes} />
+            <Redirect from="*" to="/" />
           </Switch>
       </ThemeProvider>
     </Router>
