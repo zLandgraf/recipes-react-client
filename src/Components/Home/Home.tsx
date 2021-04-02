@@ -2,16 +2,9 @@ import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { HomeTheme } from './HomeTheme';
 import { IRecipe } from '../../Models/Recipe';
-import { 
-  Grid,
-  Typography,
-  Fab,
-  Button,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions } from '@material-ui/core';
+import { Grid, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import Recipe from './Recipe';
 
 const Recipes = () => {
   const classes = HomeTheme();
@@ -38,23 +31,7 @@ const Recipes = () => {
     <>
     <Grid container xs={12} justify='center'>
       <Grid container xs={10} spacing={8} className={classes.cardsContainer}>
-        {recipes.map(recipe => (
-          <Grid item xs={4} key={recipe.id}>
-            <Card>
-              <CardMedia 
-                className={classes.cardMedia} 
-                image={recipe.image}> 
-              </CardMedia>
-              <CardContent className={classes.cardContent}>
-                <Typography variant="h6" gutterBottom={true}> {recipe.name}</Typography>
-              </CardContent>
-              <CardActions className={classes.cardActions}>
-                <Button>View</Button>
-                <Button color="primary">Add to list</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
+        { recipes.map(recipe => <Recipe recipe={recipe} />) }
       </Grid>
     </Grid>
     <Link to='/new'>
