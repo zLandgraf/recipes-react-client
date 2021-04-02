@@ -1,10 +1,8 @@
-import Navbar from '../Navbar/Navbar'
+import Navbar from './Navbar/Navbar'
 import AddRecipe from '../AddRecipe/AddRecipe';
-import Recipes from '../Recipes/Recipes';
-import {AppTheme} from './AppTheme';
-import { 
-  CssBaseline,
-  ThemeProvider} from '@material-ui/core'
+import Home from '../Home/Home';
+import { AppTheme } from './AppTheme';
+import { CssBaseline, ThemeProvider} from '@material-ui/core'
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,7 +17,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/new" component={AddRecipe} />
-            <Route path="/" component={Recipes} />
+            <Route path="/" component={Home} />
             <Redirect from="*" to="/" />
           </Switch>
       </ThemeProvider>
