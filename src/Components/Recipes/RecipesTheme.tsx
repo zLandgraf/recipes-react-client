@@ -1,15 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export interface HomeTheme{
+export interface RecipesTheme{
   [key:string] : any,
 }
 
-export const HomeTheme = makeStyles<HomeTheme>((theme) => ({
+export const RecipesTheme = makeStyles<RecipesTheme>((theme) => ({
   buttons:{
     marginTop:'2em',
   },
   cardsContainer:{
-    padding:'4em 0 4em 0',
+    padding: theme.spacing(8,12,8,12),
   },
   card:{
     height:'100%',
@@ -26,7 +26,7 @@ export const HomeTheme = makeStyles<HomeTheme>((theme) => ({
     display:'flex',
     justifyContent:'flex-end',
   },
-  addRecipe: {
+  floatButton: {
     position:'fixed',
     bottom: theme.spacing(8),
     right: theme.spacing(8)

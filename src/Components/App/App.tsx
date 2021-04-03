@@ -1,25 +1,16 @@
-import Navbar from './Navbar/Navbar'
-import AddRecipe from '../AddRecipe/AddRecipe';
-import Home from '../Home/Home';
-import { AppTheme } from './AppTheme';
 import { CssBaseline, ThemeProvider} from '@material-ui/core'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
+import Navbar from '../Layout/Navbar/Navbar';
+import { AddAppRoutes } from '../Routes/Routes';
+import { AppTheme } from './AppTheme';
 
-const App = () => {
+export function App() {
   return (
     <Router>
       <ThemeProvider theme={AppTheme}>
-          <CssBaseline />
-          <Navbar />
-          <Switch>
-            <Route path="/new" component={AddRecipe} />
-            <Route path="/" component={Home} />
-            <Redirect from="*" to="/" />
-          </Switch>
+        <CssBaseline />
+        <Navbar />
+        <AddAppRoutes />
       </ThemeProvider>
     </Router>
   )
