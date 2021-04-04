@@ -6,12 +6,13 @@ import { FormTheme } from "../AddRecipeTheme";
 interface props {
   Ingredients: IIngredient[],
   HandleNext: Function,
-  HandleBack: Function
+  HandleBack: Function,
+  HandleAdjustIngredient: Function
 }
 
 export const ThirdStep = (props:props) => {
   const theme = FormTheme();
-  const {Ingredients, HandleNext, HandleBack} = props;
+  const {Ingredients, HandleNext, HandleBack, HandleAdjustIngredient } = props;
   
   return (
     <Grid container justify='center' spacing={6}>
@@ -38,7 +39,8 @@ export const ThirdStep = (props:props) => {
               type="number" 
               label="Amount" 
               name="amount"
-              value={ingredient.amount} 
+              value={ingredient.amount}
+              onChange={(e) => HandleAdjustIngredient(e, ingredient.id)} 
               fullWidth
             />
           </Grid>
@@ -47,6 +49,7 @@ export const ThirdStep = (props:props) => {
               label="Unit"
               name="unit"
               value={ingredient.unit} 
+              onChange={(e) => HandleAdjustIngredient(e, ingredient.id)} 
               fullWidth
             />
           </Grid>
@@ -56,7 +59,8 @@ export const ThirdStep = (props:props) => {
         <Button
           className={theme.button} 
           variant="contained" 
-          size="large"> 
+          size="large"
+          onClick={() => HandleBack()}> 
           Back 
         </Button>
         <Button
@@ -64,7 +68,8 @@ export const ThirdStep = (props:props) => {
           type="submit"
           size="large"
           variant="contained" 
-          color="primary"> 
+          color="primary"
+          onClick={() => HandleNext()}> 
           Finish 
         </Button>
       </Grid>

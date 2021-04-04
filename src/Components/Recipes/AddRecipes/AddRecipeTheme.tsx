@@ -9,14 +9,11 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
     position: 'relative',
   },
   layout: {
-    width: 'auto',
+    display:'flex',
+    justifyContent:'center',
+    width: '100%',
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
   },
   paper: {
     marginTop: theme.spacing(8),
