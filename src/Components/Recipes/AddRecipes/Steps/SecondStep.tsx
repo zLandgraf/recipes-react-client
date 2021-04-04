@@ -3,25 +3,29 @@ import { Button, Grid } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
 import { FormTheme } from "../AddRecipeTheme";
+import { IIngredient } from "../../../../Models/Recipe";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface props {
+  Ingredients: IIngredient[],
+  HandleChooseIngredient: Function
   HandleNext: Function,
-  HandleBack: Function
+  HandleBack: Function,
 }
 
 export const SecondStep = (props:props) => {
   const theme = FormTheme();
-  const [options, setOptions] = useState<any>([]);
+  const {Ingredients, HandleChooseIngredient, HandleNext, HandleBack} = props;
+  const [selectOptions, setSelectOptions] = useState<IIngredient[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const loading = open && options.length === 0;
+  const loading = open && selectOptions.length === 0;
   
   useEffect(() => {
     const fetchIngredients = async () => {
        const response = await fetch('https://localhost:44348/api/ingredient');
        if(response.ok) {
           const data = await response.json();
-          setOptions(data);
+          setSelectOptions(data);
        }
     }
     fetchIngredients();
@@ -33,15 +37,13 @@ export const SecondStep = (props:props) => {
         <Autocomplete
           multiple
           open={open}
-          onOpen={() => {
-            setOpen(true);
-          }}
-          onClose={() => {
-            setOpen(false);
-          }}
-          options={options}
+          onOpen={() => {setOpen(true)}}
+          onClose={() => {setOpen(false)}}
+          options={selectOptions}
+          defaultValue={[...Ingredients]}
           loading={loading}
-          getOptionLabel={(option:any) => option.name}
+          getOptionLabel={(option:IIngredient) => option.name}
+          onChange={(event, selectedOptions) => HandleChooseIngredient(selectedOptions)}
           renderInput={(params) => (
           <TextField
             {...params} 
@@ -59,21 +61,23 @@ export const SecondStep = (props:props) => {
           />)} />
       </Grid>
       <Grid item xs={12} className={theme.buttons}>
-          <Button
-            className={theme.button} 
-            variant="contained" 
-            size="large" > 
-            Back 
-          </Button>
-          <Button
-            className={theme.button} 
-            type="submit"
-            size="large"
-            variant="contained" 
-            color="primary"> 
-            Next 
-          </Button>
-        </Grid>
+        <Button
+          className={theme.button} 
+          variant="contained" 
+          size="large"
+          onClick={() => HandleBack()}> 
+          Back 
+        </Button>
+        <Button
+          className={theme.button} 
+          type="submit"
+          size="large"
+          variant="contained" 
+          color="primary"
+          onClick={() => HandleNext()}> 
+          Next 
+        </Button>
+      </Grid>
     </Grid>
   )
 }

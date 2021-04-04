@@ -36,5 +36,8 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
   },
   linkButton:{
     textDecoration:"none",
+  },
+  ingredientContainer:{
+    marginTop: '2em'
   }
 }));
