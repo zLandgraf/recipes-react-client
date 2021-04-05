@@ -50,7 +50,7 @@ export const AddRecipeForm = () => {
     })
   }
 
-  const handleAdjustIngredient = (e:React.ChangeEvent<HTMLInputElement>, id:string) =>{
+  const handleAdjustIngredient = (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
     setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
       if(ingredient.id === id)
         return {
@@ -62,7 +62,6 @@ export const AddRecipeForm = () => {
   }
 
   const handleFinish = async () => {
-
     let response = await fetch('https://localhost:44348/api/recipe', {
        method: 'post',
        body: JSON.stringify(recipe),
