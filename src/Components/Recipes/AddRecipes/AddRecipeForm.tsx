@@ -86,13 +86,13 @@ export const AddRecipeForm = () => {
           Ingredients={recipe.ingredients} 
           HandleChooseIngredient={handleChooseIngredient}
           HandleNext={handleNext} 
-          HandleBack={handleBack}/>
+          HandleBack={handleBack} />
       case 2: 
         return <ThirdStep 
           Ingredients={recipe.ingredients} 
           HandleNext={handleNext} 
           HandleBack={handleBack}
-          HandleAdjustIngredient={handleAdjustIngredient}/>
+          HandleAdjustIngredient={handleAdjustIngredient} />
       case 3: 
         return <FourthStep 
           HandleFinish={handleFinish} 
