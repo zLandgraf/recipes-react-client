@@ -19,7 +19,6 @@ export const ThirdStep = (props:props) => {
       {Ingredients.map((ingredient) => (
         <Grid 
           container 
-          xs={11} 
           justify='center' 
           spacing={2} 
           key={ingredient.id}
@@ -70,7 +69,7 @@ export const ThirdStep = (props:props) => {
           variant="contained" 
           color="primary"
           onClick={() => HandleNext()}> 
-          Finish 
+          Next 
         </Button>
       </Grid>
     </Grid>

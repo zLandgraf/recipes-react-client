@@ -11,7 +11,7 @@ import { FirstStep } from './Steps/FirstStep'
 import { SecondStep } from './Steps/SecondStep'
 import { ThirdStep } from './Steps/ThirdStep'
 import { Grid } from '@material-ui/core'
-import { EcoTwoTone } from '@material-ui/icons'
+import { FourthStep } from './Steps/FourthStep'
 
 const createRecipe : ICreateRecipe = {
   name: '',
@@ -24,6 +24,7 @@ export const AddRecipeForm = () => {
   const stepsLabel:string[] = ['Recipe name', 'Choosing ingredients', 'Preparation', 'Choose Photo'];
   const [activeStep, setActiveStep] = useState<number>(0);
   const [recipe, setRecipe] = useState<ICreateRecipe>(createRecipe);
+  const [created, setCreated] = useState<boolean>(false);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -51,13 +52,27 @@ export const AddRecipeForm = () => {
 
   const handleAdjustIngredient = (e:React.ChangeEvent<HTMLInputElement>, id:string) =>{
     setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
-      if(ingredient.id == id)
+      if(ingredient.id === id)
         return {
           ...ingredient,
           [e.currentTarget.name] : e.currentTarget.value
         }
         return ingredient;
     })]})
+  }
+
+  const handleFinish = async () => {
+
+    let response = await fetch('https://localhost:44348/api/recipe', {
+       method: 'post',
+       body: JSON.stringify(recipe),
+       headers:{
+         "Content-Type": "application/json"
+       }
+    })
+
+    if(response.ok)
+      setCreated(true);
   }
 
   const renderStep = (step:number) => {
@@ -79,6 +94,10 @@ export const AddRecipeForm = () => {
           HandleNext={handleNext} 
           HandleBack={handleBack}
           HandleAdjustIngredient={handleAdjustIngredient}/>
+      case 3: 
+        return <FourthStep 
+          HandleFinish={handleFinish} 
+          HandleBack={handleBack} />
     }
   }
 
@@ -86,17 +105,27 @@ export const AddRecipeForm = () => {
     <Grid container justify='center'>
       <Grid item xs={6}>
         <Paper className={theme.paper}>
-          <Typography color='secondary' variant="h3" align="center">
-            <FastfoodRoundedIcon fontSize='inherit'/>
-          </Typography>
-          <Stepper activeStep={activeStep} className={theme.stepper}>
-            {stepsLabel.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          { renderStep(activeStep) }
+          {created 
+          ? (
+              <React.Fragment> 
+                <h1>Created!</h1>
+              </React.Fragment>
+            ) 
+          : (
+              <React.Fragment>
+                <Typography color='secondary' variant="h3" align="center">
+                  <FastfoodRoundedIcon fontSize='inherit'/>
+                </Typography>
+                <Stepper activeStep={activeStep} className={theme.stepper}>
+                  {stepsLabel.map((label) => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+                { renderStep(activeStep) }
+              </React.Fragment>
+          )}
         </Paper>
       </Grid>
     </Grid>

@@ -4,7 +4,6 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
 import KitchenIcon from '@material-ui/icons/Kitchen';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { Link } from "react-router-dom";
 import {FloatButtonTheme} from './FloatButtonTheme';
 import { AddRecipesRoute } from '../../Routes/Routes';

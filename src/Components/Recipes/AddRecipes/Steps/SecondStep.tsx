@@ -25,7 +25,13 @@ export const SecondStep = (props:props) => {
        const response = await fetch('https://localhost:44348/api/ingredient');
        if(response.ok) {
           const data = await response.json();
-          setSelectOptions(data);
+          setSelectOptions([...data.map((ingredient:any) => {
+            return {
+              ...ingredient,
+              amount: 0,
+              unit:'',
+            }
+          })]);
        }
     }
     fetchIngredients();
@@ -40,10 +46,11 @@ export const SecondStep = (props:props) => {
           onOpen={() => {setOpen(true)}}
           onClose={() => {setOpen(false)}}
           options={selectOptions}
-          defaultValue={[...Ingredients]}
+          value={[...Ingredients]}
           loading={loading}
           getOptionLabel={(option:IIngredient) => option.name}
           onChange={(event, selectedOptions) => HandleChooseIngredient(selectedOptions)}
+          getOptionSelected={(option, value) => option.id === value.id}
           renderInput={(params) => (
           <TextField
             {...params} 

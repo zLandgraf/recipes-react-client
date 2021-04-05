@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export interface FloatButtonTheme{
+export interface FloatButtonTheme {
   [key:string] : any,
 }
 

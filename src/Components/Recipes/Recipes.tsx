@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { IRecipe } from '../../Models/Recipe'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core'
-import FloatButton from '../Layout/FloatButton/FloatButton'
 import { RecipesTheme } from './RecipesTheme'
+import FloatButton from '../Layout/FloatButton/FloatButton'
 
 export const Recipes = () => {
   const [recipes, setRecipes] = useState<IRecipe[]>([])

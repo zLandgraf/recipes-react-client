@@ -35,6 +35,10 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
     textDecoration:"none",
   },
   ingredientContainer:{
-    marginTop: '2em'
-  }
+    padding: theme.spacing(4,4,2,4)
+  },
+  cardMedia:{
+    paddingTop:'56.25%',
+    borderRadius: '.25rem',
+  },
 }));
