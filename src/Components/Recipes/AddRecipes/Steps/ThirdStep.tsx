@@ -7,12 +7,13 @@ interface props {
   Ingredients: IIngredient[],
   HandleNext: Function,
   HandleBack: Function,
-  HandleAdjustIngredient: Function
+  HandleIngredientAmount:Function
+  HandleIngredientUnit: Function
 }
 
 export const ThirdStep = (props:props) => {
   const theme = FormTheme();
-  const {Ingredients, HandleNext, HandleBack, HandleAdjustIngredient } = props;
+  const {Ingredients, HandleNext, HandleBack, HandleIngredientAmount, HandleIngredientUnit } = props;
   
   return (
     <Grid container justify='center' spacing={6}>
@@ -35,11 +36,10 @@ export const ThirdStep = (props:props) => {
           </Grid>
           <Grid item xs={4}>
             <TextField
-              type="number" 
               label="Amount" 
               name="amount"
               value={ingredient.amount}
-              onChange={(e) => HandleAdjustIngredient(e, ingredient.id)} 
+              onChange={(e) => HandleIngredientAmount(e, ingredient.id)} 
               fullWidth
             />
           </Grid>
@@ -48,7 +48,7 @@ export const ThirdStep = (props:props) => {
               label="Unit"
               name="unit"
               value={ingredient.unit} 
-              onChange={(e) => HandleAdjustIngredient(e, ingredient.id)} 
+              onChange={(e) => HandleIngredientUnit(e, ingredient.id)} 
               fullWidth
             />
           </Grid>

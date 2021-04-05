@@ -50,12 +50,24 @@ export const AddRecipeForm = () => {
     })
   }
 
-  const handleAdjustIngredient = (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
+  const handleIngredientAmount =  (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
+     setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
+      if(ingredient.id === id)
+        return {
+          ...ingredient,
+          amount: parseFloat(e.currentTarget.value || '0')
+        }
+        return ingredient;
+    })]})
+  }
+
+  const handleIngredientUnit = (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
+    const {value} = e.currentTarget;
     setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
       if(ingredient.id === id)
         return {
           ...ingredient,
-          [e.currentTarget.name] : e.currentTarget.value
+          unit: value
         }
         return ingredient;
     })]})
@@ -64,7 +76,7 @@ export const AddRecipeForm = () => {
   const handleFinish = async () => {
     let response = await fetch('https://localhost:44348/api/recipe', {
        method: 'post',
-       body: JSON.stringify(recipe),
+       body:JSON.stringify(recipe),
        headers:{
          "Content-Type": "application/json"
        }
@@ -92,7 +104,8 @@ export const AddRecipeForm = () => {
           Ingredients={recipe.ingredients} 
           HandleNext={handleNext} 
           HandleBack={handleBack}
-          HandleAdjustIngredient={handleAdjustIngredient} />
+          HandleIngredientAmount={handleIngredientAmount} 
+          HandleIngredientUnit={handleIngredientUnit} />
       case 3: 
         return <FourthStep 
           HandleFinish={handleFinish} 
