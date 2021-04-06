@@ -5,6 +5,11 @@ export interface IIngredient {
   unit: string,
 }
 
+export interface ICreateIngredient 
+{
+  name: string,
+}
+
 export interface IRecipe {
   id: string,
   name: string,
