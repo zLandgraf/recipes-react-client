@@ -8,11 +8,8 @@ export const AppTheme = createMuiTheme({
     secondary: {
       main: '#dc004e',
     },
-    info:{
-      main: '#64b5f6',
-    },
-    success:{
-      main: '#388e3c',
+    success: {
+      main: '#dc004e',
     }
   },
 });

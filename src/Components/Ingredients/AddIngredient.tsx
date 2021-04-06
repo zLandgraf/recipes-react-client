@@ -43,12 +43,17 @@ export const AddIngredient = () => {
     setIngredient({...ingredient, name : e.currentTarget.value});
   }
 
+  const handleAddNewOne = () => {
+    setCreated(false);
+    setIngredient({...ingredient, name: ''});
+  }
+
   return (
      <Grid container justify='center'>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <Paper className={theme.paper}>
         { created 
-          ? <Success /> 
+          ? <Success HandleAddNewOne={handleAddNewOne}/> 
           : <IngredientForm 
               Ingredient={ingredient}
               Error={error}

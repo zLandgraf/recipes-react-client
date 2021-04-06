@@ -1,9 +1,8 @@
-import React from 'react'
 import { Button, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
-import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
 import { ICreateIngredient } from '../../Models/Recipe';
 import { Link } from 'react-router-dom';
 import { RecipesPath } from '../Routes/Routes';
+import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
 
 interface props {
   Ingredient: ICreateIngredient,
@@ -13,11 +12,6 @@ interface props {
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(3),
-    padding: '2em 3em 2em 3em',
-  },
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -36,11 +30,11 @@ export const IngredientForm = (props:props) => {
   const {Ingredient: ingredient, Error: error, HandleChange: handleChange, HandleFinish: handleFinish} = props;
  
   return (
-    <React.Fragment>
+    <>
       <Typography color='primary' variant="h3" align="center" gutterBottom={true}>
         <EcoOutlinedIcon fontSize='inherit'/>
       </Typography>
-      <Grid container direction="column" spacing={8}>
+      <Grid container direction="column" spacing={4}>
         <Grid item xs={12}>
           <TextField
             label="Name"
@@ -72,6 +66,6 @@ export const IngredientForm = (props:props) => {
           </Button>
         </Grid>
       </Grid>
-    </React.Fragment>
+    </>
   )
 }
