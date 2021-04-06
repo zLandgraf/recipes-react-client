@@ -3,10 +3,13 @@ import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
+import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import { Link } from "react-router-dom";
-import {FloatButtonTheme} from './FloatButtonTheme';
-import { AddRecipesRoute } from '../../Routes/Routes';
+import { FloatButtonTheme } from './FloatButtonTheme';
+import { AddIngredientRoute, AddRecipesRoute } from '../../Routes/Routes';
+
+
 
 const FloatButton = () => {
   const [open, setOpen] = useState(false);
@@ -16,6 +19,10 @@ const FloatButton = () => {
     { 
       icon: <Link to={AddRecipesRoute}><FastfoodRoundedIcon color="secondary" /></Link>,
       name: 'New Recipe',
+    },
+     { 
+      icon: <Link to={AddIngredientRoute}><EcoOutlinedIcon color="primary" /></Link>,
+      name: 'New ingredient',
     },
   ];
 
