@@ -1,6 +1,6 @@
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { RecipesPath } from '../Routes/Routes';
+import { HomeRoute } from '../Routes/Routes';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,12 +18,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface props {
+  SuccessMessage: string,
   HandleAddNewOne: Function,
 }
 
 export const Success = (props:props) => {
   const theme = useStyles();
-  const {HandleAddNewOne} = props;
+  const {SuccessMessage, HandleAddNewOne} = props;
   
   return (
     <>
@@ -31,10 +32,13 @@ export const Success = (props:props) => {
         <CheckCircleOutlineOutlinedIcon fontSize='inherit'/>
       </Typography>
       <Typography variant="h6" align="center" gutterBottom={true}>
+        {SuccessMessage} 
+      </Typography>
+      <Typography variant="h6" align="center" gutterBottom={true}>
         Add a new one?  
       </Typography>
       <Grid item xs={12} className={theme.buttons}>
-        <Link to={RecipesPath} className={theme.linkButton}>
+        <Link to={HomeRoute} className={theme.linkButton}>
           <Button 
             type="submit"
             size="large"

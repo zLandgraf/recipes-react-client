@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from "@material-ui/core"
 import { Link } from "react-router-dom";
-import { RecipesPath } from "../../../Routes/Routes";
+import { HomeRoute } from "../../../Routes/Routes";
 import { FormTheme } from '../AddRecipeTheme'
 
 interface props {
@@ -38,7 +38,7 @@ export const FirstStep = (props : props) => {
         />
       </Grid>
       <Grid item xs={12} className={theme.buttons}>
-        <Link to={RecipesPath} className={theme.linkButton}>
+        <Link to={HomeRoute} className={theme.linkButton}>
           <Button 
             type="submit"
             size="large"

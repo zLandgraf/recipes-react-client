@@ -1,7 +1,7 @@
 import { Button, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
 import { ICreateIngredient } from '../../Models/Recipe';
 import { Link } from 'react-router-dom';
-import { RecipesPath } from '../Routes/Routes';
+import { HomeRoute } from '../Routes/Routes';
 import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
 
 interface props {
@@ -48,7 +48,7 @@ export const IngredientForm = (props:props) => {
           />
         </Grid>
         <Grid item xs={12} className={theme.buttons}>
-          <Link to={RecipesPath} className={theme.linkButton}>
+          <Link to={HomeRoute} className={theme.linkButton}>
             <Button 
               type="submit"
               size="large"

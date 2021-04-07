@@ -11,17 +11,16 @@ import { FirstStep } from './Steps/FirstStep'
 import { SecondStep } from './Steps/SecondStep'
 import { ThirdStep } from './Steps/ThirdStep'
 import { Grid } from '@material-ui/core'
-import { FourthStep } from './Steps/FourthStep'
+import { Success } from '../../Common/Success'
 
 const createRecipe : ICreateRecipe = {
   name: '',
-  image: '',
   ingredients: []
 }
 
 export const AddRecipeForm = () => {
   const theme = FormTheme();
-  const stepsLabel:string[] = ['Recipe name', 'Choosing ingredients', 'Preparation', 'Choose Photo'];
+  const stepsLabel:string[] = ['Recipe name', 'Choosing ingredients', 'Preparation'];
   const [activeStep, setActiveStep] = useState<number>(0);
   const [recipe, setRecipe] = useState<ICreateRecipe>(createRecipe);
   const [created, setCreated] = useState<boolean>(false);
@@ -86,6 +85,12 @@ export const AddRecipeForm = () => {
       setCreated(true);
   }
 
+  const handleAddNewOne = () => {
+    setActiveStep(0);
+    setRecipe(createRecipe);
+    setCreated(false);
+  }
+
   const renderStep = (step:number) => {
     switch (step) {
       case 0: 
@@ -102,14 +107,10 @@ export const AddRecipeForm = () => {
       case 2: 
         return <ThirdStep 
           Ingredients={recipe.ingredients} 
-          HandleNext={handleNext} 
+          HandleNext={handleFinish} 
           HandleBack={handleBack}
           HandleIngredientAmount={handleIngredientAmount} 
           HandleIngredientUnit={handleIngredientUnit} />
-      case 3: 
-        return <FourthStep 
-          HandleFinish={handleFinish} 
-          HandleBack={handleBack} />
     }
   }
 
@@ -119,9 +120,9 @@ export const AddRecipeForm = () => {
         <Paper className={theme.paper}>
           {created 
           ? (
-              <React.Fragment> 
-                <h1>Created!</h1>
-              </React.Fragment>
+              <Success 
+                HandleAddNewOne={handleAddNewOne} 
+                SuccessMessage={"Recipe Created!"} />
             ) 
           : (
               <React.Fragment>

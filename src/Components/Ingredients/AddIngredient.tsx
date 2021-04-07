@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Grid, Paper } from "@material-ui/core"
 import { ICreateIngredient } from "../../Models/Recipe";
-import { Success } from "./Success";
+import { Success } from "../Common/Success";
 import { IngredientForm } from "./IngredientForm";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,21 +18,6 @@ export const AddIngredient = () => {
   const[ingredient, setIngredient] = useState<ICreateIngredient>({name: ''});
   const[error, setError] = useState<string>('');
   const[created, setCreated] = useState<boolean>(false);
-  
-  const handleFinish = async () => {
-    if(!error){
-       let response = await fetch('https://localhost:44348/api/ingredient', {
-       method: 'post',
-       body:JSON.stringify(ingredient),
-       headers:{
-         "Content-Type": "application/json"
-       }
-    })
-
-    if(response.ok)
-      setCreated(true);
-    }
-  }
 
   const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if(e.currentTarget.value.trim().length === 0) {
@@ -43,6 +28,21 @@ export const AddIngredient = () => {
     setIngredient({...ingredient, name : e.currentTarget.value});
   }
 
+  const handleFinish = async () => {
+    if(!error) {
+      let response = await fetch('https://localhost:44348/api/ingredient', {
+        method: 'post',
+        body:JSON.stringify(ingredient),
+        headers:{
+          "Content-Type": "application/json"
+        }
+      });
+      
+      if(response.ok)
+        setCreated(true);
+    }
+  }
+  
   const handleAddNewOne = () => {
     setCreated(false);
     setIngredient({...ingredient, name: ''});
@@ -53,7 +53,7 @@ export const AddIngredient = () => {
       <Grid item xs={4}>
         <Paper className={theme.paper}>
         { created 
-          ? <Success HandleAddNewOne={handleAddNewOne}/> 
+          ? <Success HandleAddNewOne={handleAddNewOne} SuccessMessage={"Ingredient Created"}/> 
           : <IngredientForm 
               Ingredient={ingredient}
               Error={error}

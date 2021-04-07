@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import { FloatButtonTheme } from './FloatButtonTheme';
 import { AddIngredientRoute, AddRecipesRoute } from '../../Routes/Routes';
 
-
-
 const FloatButton = () => {
   const [open, setOpen] = useState(false);
   const theme = FloatButtonTheme();

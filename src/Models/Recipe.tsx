@@ -19,6 +19,5 @@ export interface IRecipe {
 
 export interface ICreateRecipe {
   name: string,
-  image?: string, 
   ingredients: IIngredient []
 }
