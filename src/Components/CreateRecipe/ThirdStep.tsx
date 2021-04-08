@@ -1,10 +1,11 @@
-import { Grid, TextField } from "@material-ui/core"
+import { CircularProgress, Grid, TextField } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import { IIngredient } from "../../Models/Recipe";
 import { FormTheme } from "./AddRecipeTheme";
 
 interface props {
   Ingredients: IIngredient[],
+  Loading: boolean,
   HandleNext: Function,
   HandleBack: Function,
   HandleIngredientAmount:Function
@@ -13,7 +14,7 @@ interface props {
 
 export const ThirdStep = (props:props) => {
   const theme = FormTheme();
-  const {Ingredients, HandleNext, HandleBack, HandleIngredientAmount, HandleIngredientUnit } = props;
+  const {Ingredients, Loading, HandleNext, HandleBack, HandleIngredientAmount, HandleIngredientUnit } = props;
   
   return (
     <Grid container justify='center' spacing={6}>
@@ -40,6 +41,7 @@ export const ThirdStep = (props:props) => {
               name="amount"
               value={ingredient.amount}
               onChange={(e) => HandleIngredientAmount(e, ingredient.id)} 
+              disabled={Loading}
               fullWidth
             />
           </Grid>
@@ -49,6 +51,7 @@ export const ThirdStep = (props:props) => {
               name="unit"
               value={ingredient.unit} 
               onChange={(e) => HandleIngredientUnit(e, ingredient.id)} 
+              disabled={Loading}
               fullWidth
             />
           </Grid>
@@ -59,6 +62,7 @@ export const ThirdStep = (props:props) => {
           className={theme.button} 
           variant="contained" 
           size="large"
+          disabled={Loading}
           onClick={() => HandleBack()}> 
           Back 
         </Button>
@@ -68,8 +72,9 @@ export const ThirdStep = (props:props) => {
           size="large"
           variant="contained" 
           color="primary"
+          disabled={Loading}
           onClick={() => HandleNext()}> 
-          Next 
+          Next {Loading && <CircularProgress size={15} className={theme.spinner}/>}
         </Button>
       </Grid>
     </Grid>

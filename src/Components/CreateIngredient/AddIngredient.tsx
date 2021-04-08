@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import { LinearProgress, makeStyles } from "@material-ui/core";
 import { Grid, Paper } from "@material-ui/core"
 import { ICreateIngredient } from "../../Models/Recipe";
 import { Success } from "../Common/Success";
@@ -7,16 +7,19 @@ import { IngredientForm } from "./IngredientForm";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(3),
     padding: '2em 3em 2em 3em',
   },
+  formContainer: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(3),
+  }
 }));
 
 export const AddIngredient = () => {
   const theme = useStyles();
   const[ingredient, setIngredient] = useState<ICreateIngredient>({name: ''});
   const[error, setError] = useState<string>('');
+  const[loading, setLoading] = useState<boolean>(false);
   const[created, setCreated] = useState<boolean>(false);
 
   const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -30,6 +33,7 @@ export const AddIngredient = () => {
 
   const handleFinish = async () => {
     if(!error) {
+      setLoading(true);
       let response = await fetch('https://localhost:44348/api/ingredient', {
         method: 'post',
         body:JSON.stringify(ingredient),
@@ -41,6 +45,7 @@ export const AddIngredient = () => {
       if(response.ok)
         setCreated(true);
     }
+    setLoading(false);
   }
   
   const handleAddNewOne = () => {
@@ -50,12 +55,14 @@ export const AddIngredient = () => {
 
   return (
      <Grid container justify='center'>
-      <Grid item xs={4}>
+      <Grid item xs={4} className={theme.formContainer}>
+        { loading && <LinearProgress /> }
         <Paper className={theme.paper}>
         { created 
           ? <Success HandleAddNewOne={handleAddNewOne} SuccessMessage={"Ingredient Created"}/> 
           : <IngredientForm 
               Ingredient={ingredient}
+              Loading={loading}
               Error={error}
               HandleChange={handleChange} 
               HandleFinish={handleFinish}/>

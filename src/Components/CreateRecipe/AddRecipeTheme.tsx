@@ -8,6 +8,10 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
   appBar: {
     position: 'relative',
   },
+  formContainer:{
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(3),
+  },
   layout: {
     display:'flex',
     justifyContent:'center',
@@ -16,8 +20,7 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
     marginRight: theme.spacing(2),
   },
   paper: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(3),
+   
     padding: '2em 3em 2em 3em',
   },
   stepper: {
@@ -41,4 +44,7 @@ export const FormTheme = makeStyles<FormTheme>((theme) => ({
     paddingTop:'56.25%',
     borderRadius: '.25rem',
   },
+  spinner: {
+    marginLeft: '10px',
+  }
 }));

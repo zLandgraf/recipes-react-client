@@ -8,7 +8,7 @@ import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
 import { FormTheme } from './AddRecipeTheme'
 import { ICreateRecipe } from '../../Models/Recipe'
 import { FirstStep } from './FirstStep'
-import { Grid } from '@material-ui/core'
+import { Grid, LinearProgress } from '@material-ui/core'
 import { Success } from '../Common/Success'
 import { ThirdStep } from './ThirdStep'
 import { SecondStep } from './SecondStep'
@@ -24,6 +24,7 @@ export const AddRecipeForm = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [recipe, setRecipe] = useState<ICreateRecipe>(createRecipe);
   const [created, setCreated] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -73,6 +74,7 @@ export const AddRecipeForm = () => {
   }
 
   const handleFinish = async () => {
+    setLoading(true);
     let response = await fetch('https://localhost:44348/api/recipe', {
        method: 'post',
        body:JSON.stringify(recipe),
@@ -83,6 +85,8 @@ export const AddRecipeForm = () => {
 
     if(response.ok)
       setCreated(true);
+    
+    setLoading(false);
   }
 
   const handleAddNewOne = () => {
@@ -106,7 +110,8 @@ export const AddRecipeForm = () => {
           HandleBack={handleBack} />
       case 2: 
         return <ThirdStep 
-          Ingredients={recipe.ingredients} 
+          Ingredients={recipe.ingredients}
+          Loading = {loading} 
           HandleNext={handleFinish} 
           HandleBack={handleBack}
           HandleIngredientAmount={handleIngredientAmount} 
@@ -116,7 +121,8 @@ export const AddRecipeForm = () => {
 
   return ( 
     <Grid container justify='center'>
-      <Grid item xs={6}>
+      <Grid item xs={6} className={theme.formContainer}>
+        { loading && <LinearProgress /> }
         <Paper className={theme.paper}>
           {created 
           ? (
