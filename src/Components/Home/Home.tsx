@@ -3,7 +3,7 @@ import { IRecipe } from '../../Models/Recipe'
 import { Grid, makeStyles } from '@material-ui/core'
 import FloatButton from '../Layout/FloatButton/FloatButton'
 import { RecipesCards } from './RecipesCards'
-import { RecipesCardsSkeleton } from './RecipesCardsSkeleton'
+import { ShoppingList } from './ShoppingList'
 
 const useStyles = makeStyles((theme) => ({
   cardsContainer:{
@@ -11,15 +11,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+export interface IShoppingItems {
+  id: number,
+  recipe : IRecipe,
+  day: string,
+  meal: string,
+}
+
 export const Home = () => {
   const theme = useStyles();
-  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  
+  const [shoppingOpen, setShoppingOpen] = useState<boolean>(false);
+  const [shoppingItems, setShoppingItems] = useState<IShoppingItems[]>([])
+
+  const handleAddToShoppingList = (recipe:IRecipe) => {
+    setShoppingItems([...shoppingItems, {
+      id: 1,
+      recipe: recipe,
+      day: '',
+      meal: '',
+    }]);
+
+    setShoppingOpen(true);
+  }
+
+  const handleContinueAddingToShoppingList = () => {
+    setShoppingOpen(false);
+  }
+
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch(`https://localhost:44348/api/recipe?ItemsPerPage=${itemsPerPage}`);
+      const response = await fetch(`https://localhost:44348/api/recipe?ItemsPerPage=9`);
       if(response.ok) {
         const data = await response.json();
         setRecipes(data);
@@ -28,13 +51,19 @@ export const Home = () => {
     }
     fetchRecipes();
   }, [])
-  
+
   return (
     <>
       <Grid container spacing={8} justify='center' className={theme.cardsContainer}>
-        {loading 
-          ? <RecipesCardsSkeleton skeletons={itemsPerPage} /> 
-          : <RecipesCards Recipes={recipes} />}
+        {shoppingOpen 
+          ? <ShoppingList
+              ShoppingItems = {shoppingItems} 
+              HandleContinueAdding={handleContinueAddingToShoppingList}/> 
+          : <RecipesCards 
+              Recipes={recipes} 
+              Loading={loading} 
+              HandleAddToShoppingList={handleAddToShoppingList}/>
+        } 
       </Grid>
       <FloatButton />
     </>
