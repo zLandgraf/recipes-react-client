@@ -1,7 +1,7 @@
-import { AddRecipeForm } from '../Recipes/AddRecipes/AddRecipeForm';
+import { AddRecipeForm } from '../CreateRecipe/AddRecipeForm';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { NotFound } from '../Layout/NotFound/NotFound';
-import { AddIngredient } from '../Ingredients/AddIngredient';
+import { AddIngredient } from '../CreateIngredient/AddIngredient';
 import { Home } from '../Home/Home';
 
 export const HomeRoute = '/home';

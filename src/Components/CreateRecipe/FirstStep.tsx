@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from "@material-ui/core"
 import { Link } from "react-router-dom";
-import { HomeRoute } from "../../../Routes/Routes";
-import { FormTheme } from '../AddRecipeTheme'
+import { HomeRoute } from "../Routes/Routes";
+import { FormTheme } from "./AddRecipeTheme";
 
 interface props {
   Name: string,

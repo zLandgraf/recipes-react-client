@@ -6,12 +6,12 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Typography from '@material-ui/core/Typography'
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
 import { FormTheme } from './AddRecipeTheme'
-import { ICreateRecipe } from '../../../Models/Recipe'
-import { FirstStep } from './Steps/FirstStep'
-import { SecondStep } from './Steps/SecondStep'
-import { ThirdStep } from './Steps/ThirdStep'
+import { ICreateRecipe } from '../../Models/Recipe'
+import { FirstStep } from './FirstStep'
 import { Grid } from '@material-ui/core'
-import { Success } from '../../Common/Success'
+import { Success } from '../Common/Success'
+import { ThirdStep } from './ThirdStep'
+import { SecondStep } from './SecondStep'
 
 const createRecipe : ICreateRecipe = {
   name: '',

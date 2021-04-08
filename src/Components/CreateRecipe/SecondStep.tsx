@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Grid, Modal } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
-import { FormTheme } from "../AddRecipeTheme";
-import { IIngredient } from "../../../../Models/Recipe";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { IIngredient } from "../../Models/Recipe";
+import { FormTheme } from "./AddRecipeTheme";
 
 interface props {
   Ingredients: IIngredient[],
