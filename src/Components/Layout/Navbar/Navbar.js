@@ -71,7 +71,7 @@ export default function Navbar() {
       <AppBar position="relative" color="primary" className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <Grid container className={classes.teste}>
-            <Grid item xs={1}className={classes.titleContainer}>
+            <Grid item xs={1} className={classes.titleContainer}>
               <IconButton className={classes.menuButton}>
                 <MenuIcon />
               </IconButton>
@@ -105,23 +105,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-
-{/*       <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          */}
