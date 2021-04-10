@@ -67,41 +67,39 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
   return (
-    <div>
-      <AppBar position="relative" color="primary" className={classes.root}>
-        <Toolbar className={classes.toolbar}>
-          <Grid container className={classes.teste}>
-            <Grid item xs={1} className={classes.titleContainer}>
-              <IconButton className={classes.menuButton}>
-                <MenuIcon />
-              </IconButton>
-              <Link to='/' className={classes.title}>
-                <Typography variant="h6">
-                  Receitas
-                </Typography>
-              </Link>
-            </Grid>
-            <Grid item xs={6}>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
-            </Grid>
-            <Grid>
-              <Button color="inherit">Login</Button>
-            </Grid>
+    <AppBar position="relative" color="primary" className={classes.root}>
+      <Toolbar className={classes.toolbar}>
+        <Grid container className={classes.teste}>
+          <Grid item xs={1} className={classes.titleContainer}>
+            <IconButton className={classes.menuButton}>
+              <MenuIcon />
+            </IconButton>
+            <Link to='/' className={classes.title}>
+              <Typography variant="h6">
+                Receitas
+              </Typography>
+            </Link>
           </Grid>
-        </Toolbar>
-      </AppBar>
-    </div>
+          <Grid item xs={6}>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
+          </Grid>
+          <Grid>
+            <Button color="inherit">Login</Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }
