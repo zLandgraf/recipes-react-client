@@ -42,7 +42,7 @@ export const Home = () => {
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch(`https://localhost:44348/api/recipe?ItemsPerPage=9`);
+      const response = await fetch(`https://localhost:44348/api/recipe?ItemsPerPage=12`);
       if(response.ok) {
         const data = await response.json();
         setRecipes(data);

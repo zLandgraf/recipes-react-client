@@ -1,6 +1,6 @@
 import { IRecipe } from '../../Models/Recipe'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core'
-import { RecipesCardsSkeleton } from './RecipesCardsSkeleton';
+import RecipesCardsSkeleton from './RecipesCardsSkeleton';
 
 export const useCardStyles = makeStyles((theme) => ({
   buttons:{
@@ -38,7 +38,7 @@ export const RecipesCards = (props:props) => {
     ? <RecipesCardsSkeleton skeletons={9} /> 
     : <>
         { Recipes.map((recipe:IRecipe) => (
-          <Grid item xs={4} key={recipe.id}>
+          <Grid item xs={3} key={recipe.id}>
             <Card>
               <CardMedia 
                 className={theme.cardMedia} 

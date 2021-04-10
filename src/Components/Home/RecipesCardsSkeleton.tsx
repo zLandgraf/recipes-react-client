@@ -27,15 +27,14 @@ interface props {
   skeletons:number,
 }
 
-export const RecipesCardsSkeleton = (props:props) => {
+const RecipesCardsSkeleton : React.FC<props> = ({ skeletons }) => {
   const theme = useStyles();
-  const { skeletons } = props;
   const cards = Array(skeletons).fill({});
-  
+
   return (
    <>
     {cards.map((card, i) => (
-        <Grid item xs={4} key={i}>
+        <Grid item xs={3} key={i}>
           <Card>
             <Skeleton variant='rect' className={theme.cardMedia} />
             <CardContent className={theme.cardContent}>
@@ -50,3 +49,5 @@ export const RecipesCardsSkeleton = (props:props) => {
    </>
   )
 }
+
+export default RecipesCardsSkeleton
