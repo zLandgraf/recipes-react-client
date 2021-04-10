@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(8),
     paddingLeft: theme.spacing(8)
   },
+  toolbar:{
+    padding: theme.spacing(2)
+  },
   titleContainer:{
     display:'flex',
     alignItems:'center',
@@ -66,7 +69,7 @@ export default function Navbar() {
   return (
     <div>
       <AppBar position="relative" color="primary" className={classes.root}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Grid container className={classes.teste}>
             <Grid item xs={1}className={classes.titleContainer}>
               <IconButton className={classes.menuButton}>
