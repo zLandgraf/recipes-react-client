@@ -14,18 +14,9 @@ export function App() {
       <CssBaseline />
       <Navbar />
       <Switch>
-        <Route 
-          exact={true} 
-          path={AddRecipesRoute} 
-          component={AddRecipeForm}/>
-        <Route 
-          exact={true} 
-          path={AddIngredientRoute} 
-          component={AddIngredient}/>
-        <Route 
-          exact={true}
-          path={HomeRoute}
-          component={Home}/>
+        <Route exact={true} path={AddRecipesRoute} component={AddRecipeForm} />
+        <Route exact={true} path={AddIngredientRoute} component={AddIngredient}/>
+        <Route exact={true} path={HomeRoute} component={Home}/>
         <Redirect  exact={true} from='/' to={HomeRoute} />
         <Route component={NotFound}/>
       </Switch>
