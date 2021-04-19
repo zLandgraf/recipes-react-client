@@ -27,16 +27,19 @@ export function App() {
       }
     }
     fetchRecipes();
-  }, [])
+  }, []);
+
+  const MockId  = () : number => 
+  { 
+    return shoppingItems.length + 1;
+  }
 
   const handleAddToShoppingList = (recipe:IRecipe) => {
-    let id = shoppingItems.length + 1;
-    
     setShoppingItems([...shoppingItems, {
-      id: id,
+      id: MockId(),
       recipe: recipe,
-      day: '',
-      meal: '',
+      day: 'segunda',
+      meal: 'café',
     }]);
 
     setShoppingOpen(true);
@@ -51,6 +54,22 @@ export function App() {
   }
 
   const handleDuplicateShoppingListItem = (item:IShoppingItems) => {
+    setShoppingItems([...shoppingItems, {
+      ...item,
+      id : MockId(),
+    }])
+  }
+
+  const handleSelect = (id:number, target: string, value: string | null) => {
+    setShoppingItems([...shoppingItems.map((item) => {
+      if(item.id === id){
+        return {
+          ...item,
+          [target]: value
+        }
+      }
+      return item;
+    })])
   }
 
   return (
@@ -77,6 +96,7 @@ export function App() {
                   handleDuplicateItem={handleDuplicateShoppingListItem}
                   handleRemoveItem={handleRemoveShoppingListItem}
                   handleContinueAdding={handleContinueAddingToShoppingList}
+                  handleSelect = {handleSelect}
                 />  
             : () => 
                 <Redirect to={HomeRoute} />

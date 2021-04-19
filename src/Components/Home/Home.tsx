@@ -18,7 +18,6 @@ interface props {
 
 export const Home : React.FC<props> = ({ recipes, loading, handleAddToShoppingList }) => {
   const theme = useStyles();
-
   return (
     <>
       <Grid container spacing={8} justify='center' className={theme.cardsContainer}>

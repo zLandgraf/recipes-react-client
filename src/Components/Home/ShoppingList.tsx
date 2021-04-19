@@ -38,9 +38,10 @@ interface props {
   handleContinueAdding: () => void,
   handleDuplicateItem: (item:IShoppingItems) => void,
   handleRemoveItem: (id:number) => void, 
+  handleSelect: (id:number, target:string, value:string | null) => void,
 }
 
-export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdding, handleDuplicateItem, handleRemoveItem }) => {
+export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdding, handleDuplicateItem, handleRemoveItem, handleSelect }) => {
   const theme = useStyles();
   
   return (
@@ -61,30 +62,34 @@ export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdd
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {shoppingItems.map((item, i) => (
-                    <TableRow key={i}>
-                      <TableCell>{i + 1}</TableCell>
+                  {shoppingItems.map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.id}</TableCell>
                       <TableCell>{item.recipe.name}</TableCell>
                       <TableCell>
                         <Autocomplete
-                          id="combo-box-demo"
                           options={['segunda', 'terça', 'quarta']}
                           getOptionLabel={(option) => option}
                           style={{ width: '100%' }}
-                          renderInput={(params) => <TextField {...params} />}
+                          getOptionSelected={(option, value) => option === value}
+                          value={item.day}
+                          onChange={(e:any, value:string | null) => handleSelect(item.id, 'day', value)}
+                          renderInput={(params) => <TextField {...params} variant='outlined'/>}
                         />
                       </TableCell>
                       <TableCell>
                         <Autocomplete
-                          id="combo-box-demo"
                           options={['café', 'almoço', 'janta']}
                           getOptionLabel={(option) => option}
+                          getOptionSelected={(option, value) => option === value}
+                          value={item.meal}
                           style={{ width: '100%' }}
-                          renderInput={(params) => <TextField {...params} />}
+                          onChange={(e:any, value:string | null) => handleSelect(item.id, 'meal', value)}
+                          renderInput={(params) => <TextField {...params} variant='outlined'/>}
                         />
                       </TableCell>
                       <TableCell align='center'> 
-                        <IconButton aria-label="delete" color='primary'>
+                        <IconButton aria-label="delete" color='primary' onClick={() => handleDuplicateItem(item)}>
                           <AddCircleRoundedIcon />
                         </IconButton>
                         <IconButton aria-label="delete" color='secondary' onClick={() => handleRemoveItem(item.id)}>
