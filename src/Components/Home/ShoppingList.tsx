@@ -3,10 +3,13 @@ import {
   Grid,
   Paper,
   makeStyles,
-  Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TextField } from '@material-ui/core'
+  Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TextField, IconButton } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { IShoppingItems } from '../../Models/Recipe';
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 
 const useStyles = makeStyles((theme) => ({
   root:{
@@ -16,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '50vh',
   },
   resumoContainer:{
-    minHeight: '30vh',
+    minHeight: '300px',
   },
   receitasPaper:{
-    padding: theme.spacing(2),
+    padding: theme.spacing(4,6,8,6),
     height: '100%',
   },
   resumoMain:{
@@ -32,10 +35,12 @@ const useStyles = makeStyles((theme) => ({
 
 interface props {
   shoppingItems: IShoppingItems[],
-  handleContinueAdding:Function, 
+  handleContinueAdding: () => void,
+  handleDuplicateItem: (item:IShoppingItems) => void,
+  handleRemoveItem: (id:number) => void, 
 }
 
-export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdding}) => {
+export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdding, handleDuplicateItem, handleRemoveItem }) => {
   const theme = useStyles();
   
   return (
@@ -43,7 +48,7 @@ export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdd
       <Grid container className={theme.root} spacing={3}>
         <Grid item xs={9} className={theme.receitasContainer}>
           <Paper className={theme.receitasPaper} elevation={1}>
-            <Typography variant='h5' gutterBottom={true}> Lista de compra</Typography>
+            <Typography variant='h4' gutterBottom={true} color='primary' ><ShoppingCartRoundedIcon fontSize='inherit'/></Typography>
             <TableContainer>
               <Table>
                 <TableHead>
@@ -52,7 +57,7 @@ export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdd
                     <TableCell width={'30%'}>Receita</TableCell>
                     <TableCell width={'15%'}>Dia</TableCell>
                     <TableCell width={'15%'}>Refeição</TableCell>
-                    <TableCell width={'10%'} align='center'>Ações</TableCell>
+                    <TableCell width={'15%'} align='center'>Ações</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -66,7 +71,7 @@ export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdd
                           options={['segunda', 'terça', 'quarta']}
                           getOptionLabel={(option) => option}
                           style={{ width: '100%' }}
-                          renderInput={(params) => <TextField {...params} variant="outlined" />}
+                          renderInput={(params) => <TextField {...params} />}
                         />
                       </TableCell>
                       <TableCell>
@@ -75,10 +80,17 @@ export const ShoppingList : React.FC<props> = ({shoppingItems, handleContinueAdd
                           options={['café', 'almoço', 'janta']}
                           getOptionLabel={(option) => option}
                           style={{ width: '100%' }}
-                          renderInput={(params) => <TextField {...params} variant="outlined" />}
+                          renderInput={(params) => <TextField {...params} />}
                         />
                       </TableCell>
-                      <TableCell align='center'>Ações</TableCell>
+                      <TableCell align='center'> 
+                        <IconButton aria-label="delete" color='primary'>
+                          <AddCircleRoundedIcon />
+                        </IconButton>
+                        <IconButton aria-label="delete" color='secondary' onClick={() => handleRemoveItem(item.id)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

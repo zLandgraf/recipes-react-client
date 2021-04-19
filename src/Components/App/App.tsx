@@ -30,8 +30,10 @@ export function App() {
   }, [])
 
   const handleAddToShoppingList = (recipe:IRecipe) => {
+    let id = shoppingItems.length + 1;
+    
     setShoppingItems([...shoppingItems, {
-      id: 1,
+      id: id,
       recipe: recipe,
       day: '',
       meal: '',
@@ -42,6 +44,13 @@ export function App() {
 
   const handleContinueAddingToShoppingList = () => {
     setShoppingOpen(false);
+  }
+
+  const handleRemoveShoppingListItem  = (id:number) => {
+    setShoppingItems([...shoppingItems.filter(item => item.id !== id)]);
+  }
+
+  const handleDuplicateShoppingListItem = (item:IShoppingItems) => {
   }
 
   return (
@@ -62,8 +71,15 @@ export function App() {
           path={ShoppingListRoute}
           component={ 
             shoppingOpen 
-            ? () => <ShoppingList shoppingItems={shoppingItems} handleContinueAdding={handleContinueAddingToShoppingList}/>  
-            : () => <Redirect to={HomeRoute} />
+            ? () => 
+                <ShoppingList 
+                  shoppingItems={shoppingItems} 
+                  handleDuplicateItem={handleDuplicateShoppingListItem}
+                  handleRemoveItem={handleRemoveShoppingListItem}
+                  handleContinueAdding={handleContinueAddingToShoppingList}
+                />  
+            : () => 
+                <Redirect to={HomeRoute} />
           }/>
         <Route 
           exact={true}
