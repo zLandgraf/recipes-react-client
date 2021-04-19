@@ -21,3 +21,10 @@ export interface ICreateRecipe {
   name: string,
   ingredients: IIngredient []
 }
+
+export interface IShoppingItems {
+  id: number,
+  recipe : IRecipe,
+  day: string,
+  meal: string,
+}

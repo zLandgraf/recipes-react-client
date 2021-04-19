@@ -1,5 +1,5 @@
 import { Button, Grid, Paper, makeStyles, Typography } from '@material-ui/core'
-import { IShoppingItems } from './Home'
+import { IShoppingItems } from '../../Models/Recipe';
 
 const useStyles = makeStyles((theme) => ({
   root:{
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface props {
-  ShoppingItems: IShoppingItems[],
-  HandleContinueAdding:Function, 
+  shoppingItems: IShoppingItems[],
+  handleContinueAdding:Function, 
 }
 
 export const ShoppingList = (props:props) => {
@@ -42,7 +42,7 @@ export const ShoppingList = (props:props) => {
         <Grid item xs={3} className={theme.resumoContainer}>
           <div className={theme.resumoMain}>
             <Typography variant='h5'> Resumo</Typography>
-            <Button onClick={()=> props.HandleContinueAdding()}>Continue adding !</Button>
+            <Button onClick={()=> props.handleContinueAdding()}>Continue adding !</Button>
           </div>
         </Grid>
       </Grid>

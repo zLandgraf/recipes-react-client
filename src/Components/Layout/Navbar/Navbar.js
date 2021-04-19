@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(8)
   },
   toolbar:{
-    padding: theme.spacing(2)
+    padding: theme.spacing(1)
   },
   titleContainer:{
     display:'flex',
