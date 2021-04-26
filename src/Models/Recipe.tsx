@@ -24,6 +24,7 @@ export interface ICreateRecipe {
 
 export interface IShoppingItems {
   id: number,
+  amount: number,
   recipe : IRecipe,
   day: string,
   meal: string,

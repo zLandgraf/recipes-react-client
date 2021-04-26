@@ -29,19 +29,21 @@ export function App() {
     fetchRecipes();
   }, []);
 
-  const MockId  = () : number => 
+  const MockId = () : number => 
   { 
-    return shoppingItems.length + 1;
+    return shoppingItems.length > 0 
+      ? Math.max(...shoppingItems.map(x => x.id)) + 1
+      : 1
   }
 
   const handleAddToShoppingList = (recipe:IRecipe) => {
     setShoppingItems([...shoppingItems, {
       id: MockId(),
+      amount: 1,
       recipe: recipe,
       day: 'segunda',
       meal: 'café',
     }]);
-
     setShoppingOpen(true);
   }
 
@@ -72,6 +74,11 @@ export function App() {
     })])
   }
 
+  const handleClearShoppingList = () => {
+    setShoppingItems([]);
+    setShoppingOpen(false);
+  }
+
   return (
     <Router>
       <CssBaseline />
@@ -97,6 +104,7 @@ export function App() {
                   handleRemoveItem={handleRemoveShoppingListItem}
                   handleContinueAdding={handleContinueAddingToShoppingList}
                   handleSelect = {handleSelect}
+                  handleClearShoppingList = {handleClearShoppingList}
                 />  
             : () => 
                 <Redirect to={HomeRoute} />
