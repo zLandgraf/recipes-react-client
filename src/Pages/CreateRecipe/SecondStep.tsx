@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import { Button, Grid, Modal } from "@material-ui/core"
+import { Button, Grid, TextField, } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab";
-import { TextField } from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { IIngredient } from "../../Models/Recipe";
-import { FormTheme } from "./AddRecipeTheme";
+import { FormTheme } from "./AddRecipeForm";
 
-interface props {
+type Props = {
   Ingredients: IIngredient[],
   HandleChooseIngredient: Function
   HandleNext: Function,
   HandleBack: Function,
 }
 
-export const SecondStep = (props:props) => {
+export const SecondStep = ({ Ingredients,
+  HandleChooseIngredient,
+  HandleNext,
+  HandleBack }: Props) => {
   const theme = FormTheme();
-  const {Ingredients, HandleChooseIngredient, HandleNext, HandleBack} = props;
   const [selectOptions, setSelectOptions] = useState<IIngredient[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const loading = open && selectOptions.length === 0;

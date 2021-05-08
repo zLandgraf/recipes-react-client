@@ -1,17 +1,64 @@
 import React, { useState } from 'react'
-import Paper from '@material-ui/core/Paper'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import Typography from '@material-ui/core/Typography'
+import {
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  Grid,
+  LinearProgress,
+  makeStyles
+} from '@material-ui/core';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
-import { FormTheme } from './AddRecipeTheme'
-import { ICreateRecipe } from '../../Models/Recipe'
+import { ICreateRecipe } from '../../Models'
 import { FirstStep } from './FirstStep'
-import { Grid, LinearProgress } from '@material-ui/core'
-import { Success } from '../Common/Success'
 import { ThirdStep } from './ThirdStep'
 import { SecondStep } from './SecondStep'
+import { Success } from '../Common/'
+
+export const FormTheme = makeStyles((theme) => ({
+  appBar: {
+    position: 'relative',
+  },
+  formContainer: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(3),
+  },
+  layout: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+  paper: {
+    padding: '2em 3em 2em 3em',
+  },
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+  linkButton: {
+    textDecoration: "none",
+  },
+  ingredientContainer: {
+    padding: theme.spacing(4, 4, 2, 4)
+  },
+  cardMedia: {
+    paddingTop: '56.25%',
+    borderRadius: '.25rem',
+  },
+  spinner: {
+    marginLeft: '10px',
+  }
+}));
 
 const createRecipe: ICreateRecipe = {
   name: '',

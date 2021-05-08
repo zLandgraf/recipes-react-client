@@ -1,9 +1,9 @@
 import { CircularProgress, Grid, TextField } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import { IIngredient } from "../../Models/Recipe";
-import { FormTheme } from "./AddRecipeTheme";
+import { FormTheme } from "./AddRecipeForm";
 
-interface props {
+type Props = {
   Ingredients: IIngredient[],
   Loading: boolean,
   HandleNext: Function,
@@ -12,9 +12,13 @@ interface props {
   HandleIngredientUnit: Function
 }
 
-export const ThirdStep = (props:props) => {
+export const ThirdStep = ({ Ingredients,
+  Loading,
+  HandleNext,
+  HandleBack,
+  HandleIngredientAmount,
+  HandleIngredientUnit }: Props) => {
   const theme = FormTheme();
-  const {Ingredients, Loading, HandleNext, HandleBack, HandleIngredientAmount, HandleIngredientUnit } = props;
   
   return (
     <Grid container justify='center' spacing={6}>
