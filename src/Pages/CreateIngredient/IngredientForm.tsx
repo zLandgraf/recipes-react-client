@@ -1,17 +1,8 @@
 import { Button, CircularProgress, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
-import { ICreateIngredient } from '../../Models/Recipe';
+import { ICreateIngredient } from '../../Models';
 import { Link } from 'react-router-dom';
-import { HomeRoute } from '../Routes';
+import { HomeRoute } from '../index';
 import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
-import { LocalDiningOutlined } from '@material-ui/icons';
-
-interface props {
-  Ingredient: ICreateIngredient,
-  Error: string,
-  Loading: boolean,
-  HandleChange: Function,
-  HandleFinish: Function,
-}
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
@@ -30,10 +21,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const IngredientForm = (props: props) => {
-  const theme = useStyles();
-  const { Ingredient, Error, Loading, HandleChange, HandleFinish } = props;
+type Props = {
+  Ingredient: ICreateIngredient,
+  Error: string,
+  Loading: boolean,
+  HandleChange: Function,
+  HandleFinish: Function,
+}
 
+export const IngredientForm = ({ Ingredient,
+  Error,
+  Loading,
+  HandleChange,
+  HandleFinish }: Props) => {
+  const theme = useStyles();
   return (
     <>
       <Typography color='primary' variant="h3" align="center" gutterBottom={true}>

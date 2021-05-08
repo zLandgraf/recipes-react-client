@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { LinearProgress, makeStyles } from "@material-ui/core";
-import { Grid, Paper } from "@material-ui/core"
-import { ICreateIngredient } from "../../Models/Recipe";
-import { Success } from "../Common/Success";
+import { Grid, Paper, LinearProgress, makeStyles } from "@material-ui/core";
+import { ICreateIngredient } from "../../Models/";
+import { Success } from "../Common";
 import { IngredientForm } from "./IngredientForm";
 
 const useStyles = makeStyles((theme) => ({

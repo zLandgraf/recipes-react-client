@@ -22,7 +22,7 @@ interface props {
   HandleAddNewOne: Function,
 }
 
-export const Success = (props: props) => {
+const Success = (props: props) => {
   const theme = useStyles();
   const { SuccessMessage, HandleAddNewOne } = props;
 
@@ -59,3 +59,5 @@ export const Success = (props: props) => {
     </>
   )
 }
+
+export default Success;
