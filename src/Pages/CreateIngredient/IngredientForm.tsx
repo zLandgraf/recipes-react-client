@@ -1,7 +1,7 @@
 import { Button, CircularProgress, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
 import { ICreateIngredient } from '../../Models/Recipe';
 import { Link } from 'react-router-dom';
-import { HomeRoute } from '../Routes/Routes';
+import { HomeRoute } from '../Routes';
 import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
 import { LocalDiningOutlined } from '@material-ui/icons';
 
@@ -22,22 +22,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-  linkButton:{
-    textDecoration:"none",
+  linkButton: {
+    textDecoration: "none",
   },
   spinner: {
     marginLeft: '10px',
   }
 }));
 
-export const IngredientForm = (props:props) => {
+export const IngredientForm = (props: props) => {
   const theme = useStyles();
-  const {Ingredient, Error, Loading, HandleChange, HandleFinish} = props;
- 
+  const { Ingredient, Error, Loading, HandleChange, HandleFinish } = props;
+
   return (
     <>
       <Typography color='primary' variant="h3" align="center" gutterBottom={true}>
-        <EcoOutlinedIcon fontSize='inherit'/>
+        <EcoOutlinedIcon fontSize='inherit' />
       </Typography>
       <Grid container direction="column" spacing={4}>
         <Grid item xs={12}>
@@ -55,22 +55,22 @@ export const IngredientForm = (props:props) => {
         </Grid>
         <Grid item xs={12} className={theme.buttons}>
           <Link to={HomeRoute} className={theme.linkButton}>
-            <Button 
+            <Button
               type="submit"
               size="large"
               variant="contained"
               disabled={Loading}
-              className={theme.button}> Back 
+              className={theme.button}> Back
             </Button>
           </Link>
-          <Button 
+          <Button
             type="submit"
             size="large"
-            variant="contained" 
+            variant="contained"
             color="primary"
             className={theme.button}
             disabled={Loading}
-            onClick={() => HandleFinish()}> Next {Loading ? <CircularProgress size={15} className={theme.spinner}/> : null} 
+            onClick={() => HandleFinish()}> Next {Loading ? <CircularProgress size={15} className={theme.spinner} /> : null}
           </Button>
         </Grid>
       </Grid>

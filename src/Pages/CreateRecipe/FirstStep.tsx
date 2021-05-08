@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from "@material-ui/core"
 import { Link } from "react-router-dom";
-import { HomeRoute } from "../Routes/Routes";
+import { HomeRoute } from "../Routes";
 import { FormTheme } from "./AddRecipeTheme";
 
 interface props {
@@ -10,14 +10,14 @@ interface props {
   HandleNext: Function,
 }
 
-export const FirstStep = (props : props) => {
+export const FirstStep = (props: props) => {
   const theme = FormTheme();
-  const {Name, HandleChange, HandleNext} = props;
+  const { Name, HandleChange, HandleNext } = props;
   const [error, setError] = useState<string>('');
 
   const Validade = () => {
-    if(Name.trim().length !== 0) {
-       HandleNext();  
+    if (Name.trim().length !== 0) {
+      HandleNext();
     } else {
       setError("Name is required")
     }
@@ -30,7 +30,7 @@ export const FirstStep = (props : props) => {
           label="Name"
           name="name"
           value={Name}
-          onChange={(e)=> HandleChange(e)}
+          onChange={(e) => HandleChange(e)}
           error={error.length > 0}
           helperText={error}
           variant="outlined"
@@ -39,20 +39,20 @@ export const FirstStep = (props : props) => {
       </Grid>
       <Grid item xs={12} className={theme.buttons}>
         <Link to={HomeRoute} className={theme.linkButton}>
-          <Button 
+          <Button
             type="submit"
             size="large"
             variant="contained"
-            className={theme.button}> Back 
+            className={theme.button}> Back
           </Button>
         </Link>
-        <Button 
+        <Button
           type="submit"
           size="large"
-          variant="contained" 
+          variant="contained"
           color="primary"
           className={theme.button}
-          onClick={() => Validade()}> Next 
+          onClick={() => Validade()}> Next
         </Button>
       </Grid>
     </Grid>

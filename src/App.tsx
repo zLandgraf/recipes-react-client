@@ -1,26 +1,30 @@
-import { CssBaseline } from '@material-ui/core'
-import { BrowserRouter as Router } from 'react-router-dom'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { AddIngredientRoute, AddRecipesRoute, HomeRoute, ShoppingListRoute } from '../Routes/Routes';
-import { AddRecipeForm } from '../CreateRecipe/AddRecipeForm';
-import { AddIngredient } from '../CreateIngredient/AddIngredient';
-import { Home } from '../Home/Home';
-import Navbar from '../Layout/Navbar/Navbar';
-import { NotFound } from '../Layout/NotFound/NotFound';
 import { useEffect, useState } from 'react';
-import { IRecipe, IShoppingItems } from '../../Models/Recipe';
-import { ShoppingList } from '../Home/ShoppingList';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
+import { IRecipe, IShoppingItems } from './Models';
+import {
+  Navbar,
+  NotFound,
+  Home,
+  ShoppingList,
+  AddRecipeForm,
+  AddIngredient,
+  AddIngredientRoute,
+  AddRecipesRoute,
+  HomeRoute,
+  ShoppingListRoute
+} from './Pages';
 
 export function App() {
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [shoppingOpen, setShoppingOpen] = useState<boolean>(false);
   const [shoppingItems, setShoppingItems] = useState<IShoppingItems[]>([])
-  
+
   useEffect(() => {
     const fetchRecipes = async () => {
       const response = await fetch(`https://localhost:44348/api/recipe?ItemsPerPage=12`);
-      if(response.ok) {
+      if (response.ok) {
         const data = await response.json();
         setRecipes(data);
         setLoading(false);
@@ -29,14 +33,13 @@ export function App() {
     fetchRecipes();
   }, []);
 
-  const MockId = () : number => 
-  { 
-    return shoppingItems.length > 0 
+  const MockId = (): number => {
+    return shoppingItems.length > 0
       ? Math.max(...shoppingItems.map(x => x.id)) + 1
       : 1
   }
 
-  const handleAddToShoppingList = (recipe:IRecipe) => {
+  const handleAddToShoppingList = (recipe: IRecipe) => {
     setShoppingItems([...shoppingItems, {
       id: MockId(),
       amount: 1,
@@ -51,20 +54,20 @@ export function App() {
     setShoppingOpen(false);
   }
 
-  const handleRemoveShoppingListItem  = (id:number) => {
+  const handleRemoveShoppingListItem = (id: number) => {
     setShoppingItems([...shoppingItems.filter(item => item.id !== id)]);
   }
 
-  const handleDuplicateShoppingListItem = (item:IShoppingItems) => {
+  const handleDuplicateShoppingListItem = (item: IShoppingItems) => {
     setShoppingItems([...shoppingItems, {
       ...item,
-      id : MockId(),
+      id: MockId(),
     }])
   }
 
-  const handleSelect = (id:number, target: string, value: string | null) => {
+  const handleSelect = (id: number, target: string, value: string | null) => {
     setShoppingItems([...shoppingItems.map((item) => {
-      if(item.id === id){
+      if (item.id === id) {
         return {
           ...item,
           [target]: value
@@ -84,41 +87,41 @@ export function App() {
       <CssBaseline />
       <Navbar />
       <Switch>
-        <Route 
+        <Route
           exact={true}
-          path={HomeRoute} 
-          component={ 
-            shoppingOpen 
-            ? () => <Redirect to={ShoppingListRoute} />  
-            : () => <Home recipes={recipes} loading={loading} handleAddToShoppingList={handleAddToShoppingList} />
-          }/>
+          path={HomeRoute}
+          component={
+            shoppingOpen
+              ? () => <Redirect to={ShoppingListRoute} />
+              : () => <Home recipes={recipes} loading={loading} handleAddToShoppingList={handleAddToShoppingList} />
+          } />
         <Route
           exact={true}
           path={ShoppingListRoute}
-          component={ 
-            shoppingOpen 
-            ? () => 
-                <ShoppingList 
-                  shoppingItems={shoppingItems} 
+          component={
+            shoppingOpen
+              ? () =>
+                <ShoppingList
+                  shoppingItems={shoppingItems}
                   handleDuplicateItem={handleDuplicateShoppingListItem}
                   handleRemoveItem={handleRemoveShoppingListItem}
                   handleContinueAdding={handleContinueAddingToShoppingList}
-                  handleSelect = {handleSelect}
-                  handleClearShoppingList = {handleClearShoppingList}
-                />  
-            : () => 
+                  handleSelect={handleSelect}
+                  handleClearShoppingList={handleClearShoppingList}
+                />
+              : () =>
                 <Redirect to={HomeRoute} />
-          }/>
-        <Route 
+          } />
+        <Route
           exact={true}
           path={AddRecipesRoute}
           component={AddRecipeForm} />
         <Route
           exact={true}
           path={AddIngredientRoute}
-          component={AddIngredient}/>
+          component={AddIngredient} />
         <Redirect exact={true} from='/' to={HomeRoute} />
-        <Route component={NotFound}/>
+        <Route component={NotFound} />
       </Switch>
     </Router>
   )

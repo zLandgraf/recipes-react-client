@@ -1,6 +1,6 @@
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { HomeRoute } from '../Routes/Routes';
+import { HomeRoute } from '../Routes';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-  linkButton:{
-    textDecoration:"none",
+  linkButton: {
+    textDecoration: "none",
   },
 }));
 
@@ -22,38 +22,38 @@ interface props {
   HandleAddNewOne: Function,
 }
 
-export const Success = (props:props) => {
+export const Success = (props: props) => {
   const theme = useStyles();
-  const {SuccessMessage, HandleAddNewOne} = props;
-  
+  const { SuccessMessage, HandleAddNewOne } = props;
+
   return (
     <>
       <Typography color='primary' variant="h2" align="center" gutterBottom={true}>
-        <CheckCircleOutlineOutlinedIcon fontSize='inherit'/>
+        <CheckCircleOutlineOutlinedIcon fontSize='inherit' />
       </Typography>
       <Typography variant="h6" align="center" gutterBottom={true}>
-        {SuccessMessage} 
+        {SuccessMessage}
       </Typography>
       <Typography variant="h6" align="center" gutterBottom={true}>
-        Add a new one?  
+        Add a new one?
       </Typography>
       <Grid item xs={12} className={theme.buttons}>
         <Link to={HomeRoute} className={theme.linkButton}>
-          <Button 
+          <Button
             type="submit"
             size="large"
             variant="contained"
             color="secondary"
-            className={theme.button}> No 
+            className={theme.button}> No
           </Button>
         </Link>
-        <Button 
+        <Button
           type="submit"
           size="large"
-          variant="contained" 
+          variant="contained"
           color="primary"
           className={theme.button}
-          onClick={() => HandleAddNewOne()}> Yes 
+          onClick={() => HandleAddNewOne()}> Yes
         </Button>
       </Grid>
     </>

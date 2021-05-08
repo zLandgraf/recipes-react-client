@@ -13,14 +13,14 @@ import { Success } from '../Common/Success'
 import { ThirdStep } from './ThirdStep'
 import { SecondStep } from './SecondStep'
 
-const createRecipe : ICreateRecipe = {
+const createRecipe: ICreateRecipe = {
   name: '',
   ingredients: []
 }
 
-export const AddRecipeForm = () => {
+const AddRecipeForm = () => {
   const theme = FormTheme();
-  const stepsLabel:string[] = ['Recipe name', 'Choosing ingredients', 'Preparation'];
+  const stepsLabel: string[] = ['Recipe name', 'Choosing ingredients', 'Preparation'];
   const [activeStep, setActiveStep] = useState<number>(0);
   const [recipe, setRecipe] = useState<ICreateRecipe>(createRecipe);
   const [created, setCreated] = useState<boolean>(false);
@@ -33,13 +33,14 @@ export const AddRecipeForm = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setRecipe({...recipe, [e.currentTarget.name] : e.currentTarget.value})
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRecipe({ ...recipe, [e.currentTarget.name]: e.currentTarget.value })
   }
 
-  const handleChooseIngredient = (selectedOptions:any[]) => {
-    setRecipe({...recipe, ingredients:[...selectedOptions.map(option => {
+  const handleChooseIngredient = (selectedOptions: any[]) => {
+    setRecipe({
+      ...recipe, ingredients: [...selectedOptions.map(option => {
         return {
           id: option.id,
           name: option.name,
@@ -50,42 +51,46 @@ export const AddRecipeForm = () => {
     })
   }
 
-  const handleIngredientAmount =  (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
-     setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
-      if(ingredient.id === id)
-        return {
-          ...ingredient,
-          amount: parseFloat(e.currentTarget.value || '0')
-        }
+  const handleIngredientAmount = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    setRecipe({
+      ...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
+        if (ingredient.id === id)
+          return {
+            ...ingredient,
+            amount: parseFloat(e.currentTarget.value || '0')
+          }
         return ingredient;
-    })]})
+      })]
+    })
   }
 
-  const handleIngredientUnit = (e:React.ChangeEvent<HTMLInputElement>, id:string) => {
-    const {value} = e.currentTarget;
-    setRecipe({...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
-      if(ingredient.id === id)
-        return {
-          ...ingredient,
-          unit: value
-        }
+  const handleIngredientUnit = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    const { value } = e.currentTarget;
+    setRecipe({
+      ...recipe, ingredients: [...recipe.ingredients.map((ingredient) => {
+        if (ingredient.id === id)
+          return {
+            ...ingredient,
+            unit: value
+          }
         return ingredient;
-    })]})
+      })]
+    })
   }
 
   const handleFinish = async () => {
     setLoading(true);
     let response = await fetch('https://localhost:44348/api/recipe', {
-       method: 'post',
-       body:JSON.stringify(recipe),
-       headers:{
-         "Content-Type": "application/json"
-       }
+      method: 'post',
+      body: JSON.stringify(recipe),
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
 
-    if(response.ok)
+    if (response.ok)
       setCreated(true);
-    
+
     setLoading(false);
   }
 
@@ -95,45 +100,45 @@ export const AddRecipeForm = () => {
     setCreated(false);
   }
 
-  const renderStep = (step:number) => {
+  const renderStep = (step: number) => {
     switch (step) {
-      case 0: 
+      case 0:
         return <FirstStep
           Name={recipe.name}
-          HandleChange={handleChange} 
+          HandleChange={handleChange}
           HandleNext={handleNext} />
-      case 1: 
+      case 1:
         return <SecondStep
-          Ingredients={recipe.ingredients} 
-          HandleChooseIngredient={handleChooseIngredient}
-          HandleNext={handleNext} 
-          HandleBack={handleBack} />
-      case 2: 
-        return <ThirdStep 
           Ingredients={recipe.ingredients}
-          Loading = {loading} 
-          HandleNext={handleFinish} 
+          HandleChooseIngredient={handleChooseIngredient}
+          HandleNext={handleNext}
+          HandleBack={handleBack} />
+      case 2:
+        return <ThirdStep
+          Ingredients={recipe.ingredients}
+          Loading={loading}
+          HandleNext={handleFinish}
           HandleBack={handleBack}
-          HandleIngredientAmount={handleIngredientAmount} 
+          HandleIngredientAmount={handleIngredientAmount}
           HandleIngredientUnit={handleIngredientUnit} />
     }
   }
 
-  return ( 
+  return (
     <Grid container justify='center'>
       <Grid item xs={6} className={theme.formContainer}>
-        { loading && <LinearProgress /> }
+        {loading && <LinearProgress />}
         <Paper className={theme.paper}>
-          {created 
-          ? (
-              <Success 
-                HandleAddNewOne={handleAddNewOne} 
+          {created
+            ? (
+              <Success
+                HandleAddNewOne={handleAddNewOne}
                 SuccessMessage={"Recipe Created!"} />
-            ) 
-          : (
+            )
+            : (
               <React.Fragment>
                 <Typography color='secondary' variant="h3" align="center">
-                  <FastfoodRoundedIcon fontSize='inherit'/>
+                  <FastfoodRoundedIcon fontSize='inherit' />
                 </Typography>
                 <Stepper activeStep={activeStep} className={theme.stepper}>
                   {stepsLabel.map((label) => (
@@ -142,11 +147,14 @@ export const AddRecipeForm = () => {
                     </Step>
                   ))}
                 </Stepper>
-                { renderStep(activeStep) }
+                { renderStep(activeStep)}
               </React.Fragment>
-          )}
+            )}
         </Paper>
       </Grid>
     </Grid>
   )
 }
+
+
+export default AddRecipeForm;
