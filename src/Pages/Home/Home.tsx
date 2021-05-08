@@ -1,6 +1,6 @@
-import { IRecipe } from '../../Models/Recipe'
+import { IRecipe } from '../../Models'
 import { Grid, makeStyles } from '@material-ui/core'
-import FloatButton from '../Common/FloatButton/FloatButton'
+import { FloatButton } from '../Common'
 import { RecipesCards } from './RecipesCards'
 
 const useStyles = makeStyles((theme) => ({

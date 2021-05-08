@@ -1,4 +1,4 @@
-import { Card, CardActions, CardContent, CardMedia, Grid, makeStyles } from '@material-ui/core'
+import { Card, CardActions, CardContent, Grid, makeStyles } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab';
 
 export const useStyles = makeStyles((theme) => ({
@@ -23,14 +23,13 @@ export const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface props {
+type Props = {
   skeletons:number,
 }
 
-const RecipesCardsSkeleton : React.FC<props> = ({ skeletons }) => {
+const RecipesCardsSkeleton = ({ skeletons }: Props) => {
   const theme = useStyles();
   const cards = Array(skeletons).fill({});
-
   return (
    <>
     {cards.map((card, i) => (
@@ -45,7 +44,7 @@ const RecipesCardsSkeleton : React.FC<props> = ({ skeletons }) => {
             </CardActions>
           </Card>
         </Grid> 
-      ))}
+    ))}
    </>
   )
 }

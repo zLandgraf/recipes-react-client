@@ -23,16 +23,14 @@ export const useCardStyles = makeStyles((theme) => ({
   },
 }))
 
-interface props {
+type Props = {
   Recipes : IRecipe[],
   Loading: boolean,
   HandleAddToShoppingList: Function,
 }
 
-export const RecipesCards = (props:props) => {
+export const RecipesCards = ({ Recipes, Loading, HandleAddToShoppingList }: Props) => {
   const theme = useCardStyles();
-  const { Recipes, Loading, HandleAddToShoppingList } = props;
-  
   return (
     Loading 
     ? <RecipesCardsSkeleton skeletons={9} /> 
@@ -52,7 +50,7 @@ export const RecipesCards = (props:props) => {
               </CardActions>
               </Card>
             </Grid> 
-          ))}
+        ))}
       </>
     )
 }
